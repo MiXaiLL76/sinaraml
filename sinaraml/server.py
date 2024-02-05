@@ -1,3 +1,4 @@
+import argparse
 import os
 import re
 import socket
@@ -109,9 +110,9 @@ class SinaraServer:
             help="Number of CPU cores to use for server container (default: %(default)s)",
         )
         SinaraServer.create_parser.add_argument(
-          "--ssh", 
-          action=argparse.BooleanOptionalAction, 
-          help='Connect ~/.ssh folder to server container'
+            "--ssh",
+            action=argparse.BooleanOptionalAction,
+            help="Connect ~/.ssh folder to server container",
         )
         SinaraServer.create_parser.add_argument(
             "--jovyanRootPath",
@@ -342,7 +343,7 @@ class SinaraServer:
 
         if args.ssh:
             docker_volumes += SinaraServer._prepare_ssh_volume()
-        
+
         server_cmd = "start-notebook.sh --ip=0.0.0.0 --port=8888 --NotebookApp.default_url=/lab --ServerApp.allow_password_change=False"
         if args.insecure:
             server_cmd = (
@@ -394,17 +395,17 @@ class SinaraServer:
             f"{work_volume}:/home/jovyan/work",
             f"{tmp_volume}:/tmp",
         ]
-      
+
     @staticmethod
     def _prepare_ssh_volume():
-        ssh_volume = os.path.join(os.path.expanduser('~'), ".ssh")
+        ssh_volume = os.path.join(os.path.expanduser("~"), ".ssh")
         ssh_folders = []
-        
+
         if os.path.isdir(ssh_volume):
             ssh_folders.append(f"{ssh_volume}:/home/jovyan/.ssh")
-        
+
         return ssh_folders
-        
+
     @staticmethod
     def _prepare_basic_mode(args):
         if args.createFolders == "y":
