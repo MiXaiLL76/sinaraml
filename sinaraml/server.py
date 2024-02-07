@@ -31,7 +31,7 @@ class SinaraServer:
     subject = "server"
     container_name = "jovyan-single-use"
     sinara_images = [
-        ["buslovaev/sinara-notebook", "buslovaev/sinara-cv"],
+        ["buslovaev/sinara-notebook", "mixaill76/sinara-cv-exp"],
         ["buslovaev/sinara-notebook-exp", "buslovaev/sinara-cv-exp"],
     ]
     root_parser = None
